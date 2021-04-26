@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+opencensus-ext-azure = "==1.0.4"
+opencensus-ext-flask = "==0.7.3"
+redis = "==3.5.3"
+Flask = "==1.1.2"
+applicationinsights = "*"
+[dev-packages]
+
+[requires]
+python_version = "3.8"
