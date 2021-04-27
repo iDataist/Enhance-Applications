@@ -20,7 +20,7 @@
 
    <img src="instruction-screenshots/review-pipeline.png" width="860">
 
-9. Click on **Environments** and you should see an environment named **ACDND-C4-Project**. Click on it.
+9. Click on **Environments** and you should see an environment named **Enhanding-Applications**. Click on it.
 
    <img src="instruction-screenshots/view-environment.png" width="860">
 
@@ -66,4 +66,4 @@ This will go through the process of downloading the application files and zip th
 
 If you visit the public IP address for the VMSS in your browser, you should see your deployed application.
 
-Head back to the main [README](README.md#project-instructions) for further instructions.
+
