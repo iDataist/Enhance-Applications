@@ -10,7 +10,7 @@ import logging
 from datetime import datetime
 
 # App Insights
-from opencensus.ext.azure.log_exporter import AzureLogHandler
+from opencensus.ext.azure.log_exporter import AzureLogHandler, AzureEventHandler
 from opencensus.ext.azure import metrics_exporter
 from opencensus.stats import aggregation as aggregation_module
 from opencensus.stats import measure as measure_module
@@ -22,14 +22,13 @@ from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 from applicationinsights import TelemetryClient
-from applicationinsights.logging import enable
 
-ConnectionString = 'InstrumentationKey=a96ef2f3-2722-4e58-902c-8864ea55b65f;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
+ConnectionString = 'InstrumentationKey=79f74b84-f1fc-4ad8-9f14-49ca802c4416;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
 
 # Logging
 logger = logging.getLogger(__name__)
 logger.addHandler(
-    AzureLogHandler(
+    AzureEventHandler(
         connection_string=ConnectionString)
 )
 logger.setLevel(logging.INFO)
@@ -106,17 +105,11 @@ def index():
             r.set(button1,0)
             r.set(button2,0)
             vote1 = r.get(button1).decode('utf-8')
-            properties = {'custom_dimensions': {'Cats Vote': vote1}}
-            logger.warning('Cats Vote', extra=properties)
-
             vote2 = r.get(button2).decode('utf-8')
-            properties = {'custom_dimensions': {'Dogs Vote': vote2}}
-            logger.warning('Dogs Vote', extra=properties)
 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
         else:
-
             # Insert vote result into DB
             vote = request.form['vote']
             r.incr(vote,1)
@@ -124,6 +117,9 @@ def index():
             # Get current values
             vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')
+
+            properties = {'custom_dimensions': {vote: 1}}
+            logger.warning(vote, extra=properties)
 
             # Return results
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
