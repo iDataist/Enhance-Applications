@@ -24,7 +24,7 @@ stages:
       vmImage: 'Ubuntu-16.04'
     displayName: Deploy to VMSS
     environment:
-      name: ACDND-C4-Project
+      name: Enhancing-Applications
       resourceType: VirtualMachine
     strategy:
       runOnce:
@@ -42,10 +42,10 @@ stages:
                 pip3 install opencensus-ext-flask
 
                 cd ~/
-                DIR=/home/udacityadmin/app
+                DIR=/home/admin20210405/app
                 if [ ! -d "$DIR" ]; then
                     mkdir app
                 fi
-                mv /home/udacityadmin/azagent/_work/1/drop-azurevote/$(Build.BuildId)-azurevote.zip app
+                mv /home/admin20210405/azagent/_work/1/drop-azurevote/$(Build.BuildId)-azurevote.zip app
                 cd app
                 unzip -o $(Build.BuildId)-azurevote.zip
