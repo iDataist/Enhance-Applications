@@ -17,14 +17,20 @@ With a combination of cloud technologies, such as Azure Kubernetes Service, VM S
    - [Redis—Windows Download](https://riptutorial.com/redis/example/29962/installing-and-running-redis-server-on-windows)
    - [Redis Quick Start](https://redis.io/topics/quickstart)
 
+## Deploy the webapp in Azure
+1. Log in to Azure using `az login`. Run `./vmss.sh` in the terminal. Check the Public IP address. 
+   ```
+   az vmss list-instance-connection-info \
+   --resource-group group20210405 \
+   --name vmss20210405
+   ```
+2. Connect to the VM. 
+   ```
+   ssh -p 50001 admin20210405@[public-ip]
+   ```
+3. Use Azure Pipelines to deploy the application to the Azure VM Scale Set. Follow the step-by-step instructions [here](azure-pipelines-instructions.md).
 
 
-
-### Setup Azure Pipeline to Deploy to VM Scale Set
-
-We'll use Azure Pipelines to deploy our application to an Azure VM Scale Set. Follow the step-by-step instructions [here](azure-pipelines-instructions.md).
-
-## Project Instructions
 
 ### Application Insights & Log Analytics
 
@@ -86,22 +92,3 @@ We'll use Azure Pipelines to deploy our application to an Azure VM Scale Set. Fo
    - The alert configuration in Azure Monitor which shows the resource, condition, action group (this should include a reference to your Runbook), and alert rule details (may need 2 screenshots).
    - The email you received from the alert when the Runbook was executed.
    - The summary of the alert which shows 'why did this alert fire?', timestamps, and the criterion in which it fired.
-
-## Built With
-
-### Software
-
-- [Python](https://www.python.org/downloads/) - Programming Language
-- [VS Code](https://code.visualstudio.com/) - Integrated Development Environment
-- [Azure DevOps](https://dev.azure.com) - Source control and pipeline creation tool.
-
-### Open-source 3rd-party
-
-- [Azure Voting App](https://github.com/Azure-Samples/azure-voting-app-redis) - Container and sample python flask app.
-- [Redis](https://redis.io/) - In memory database used for caching.
-
-## License
-
-[License](./LICENSE.md)
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
