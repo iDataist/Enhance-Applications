@@ -28,6 +28,8 @@ With a combination of cloud technologies, such as Azure Kubernetes Service, VM S
    ```
    ssh -p [port] admin20210405@[public-ip]
    ```
+
+   scp -r ./azure-vote admin20210405@51.143.15.41:/home/admin20210405
 3. Use Azure Pipelines to deploy the application to the Azure VM Scale Set. Follow the step-by-step instructions [here](azure-pipelines-instructions.md).
 
 ## Application Insights & Log Analytics
@@ -73,8 +75,7 @@ With a combination of cloud technologies, such as Azure Kubernetes Service, VM S
 
 ### Runbook
 1. Create an Azure Automation Account
-2. Create a Runbook—either using a script or the UI—that will remedy a problem.
-3. Create an alert which uses a runbook to remedy a problem.
-4. Cause the problem to the flask app on the VM Scale Set.
-5. Verify the problem is remedied via the Runbook.
+2. Create an alert which uses a runbook to remedy a problem.
+![](submission-screenshots/runbook/alert_config_4.png)
+
 
