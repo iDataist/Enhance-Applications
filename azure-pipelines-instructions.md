@@ -67,3 +67,5 @@ This will go through the process of downloading the application files and zip th
 If you visit the public IP address for the VMSS in your browser, you should see your deployed application.
 
 
+
+
