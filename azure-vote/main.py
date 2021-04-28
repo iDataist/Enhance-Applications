@@ -23,7 +23,7 @@ from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 from applicationinsights import TelemetryClient
 
-ConnectionString = 'InstrumentationKey=79f74b84-f1fc-4ad8-9f14-49ca802c4416;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
+ConnectionString = 'InstrumentationKey=155fb713-8f7c-455b-951d-d97fc483dd4e;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
 
 # Logging
 logger = logging.getLogger(__name__)
@@ -120,12 +120,11 @@ def index():
 
             properties = {'custom_dimensions': {vote: 1}}
             logger.warning(vote, extra=properties)
-
             # Return results
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
 if __name__ == "__main__":
 
-    # app.run() # local
+    app.run() # local
 
-    app.run(host='0.0.0.0', threaded=True, debug=True) # remote
+    # app.run(host='0.0.0.0', threaded=True, debug=True) # remote
