@@ -126,6 +126,6 @@ def index():
 
 if __name__ == "__main__":
 
-    app.run() # local
+    # app.run() # local
 
-    # app.run(host='0.0.0.0', threaded=True, debug=True) # remote
+    app.run(host='0.0.0.0', threaded=True, debug=True) # remote
