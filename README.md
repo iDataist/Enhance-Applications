@@ -4,8 +4,8 @@
 With a combination of cloud technologies, such as Azure Kubernetes Service, VM Scale Sets, Application Insights, Azure Log Analytics, and Azure Runbooks, I collected and displayed performance and health data about an application, and implemented automating remediation tasks. The project showcased my skills in diagnosing and rectifying application and infrastructure problems. Below are the project steps:
 - Setup Application Insights monitoring on a VMSS and implement monitoring in an application to collect telemetry data
 - Setup an auto-scaling for a VMSS
+- Setup a VMSS alert and create a RunBook to automate the resolution of performance issues
 - Create alerts to trigger auto-scaling on an AKS cluster and trigger a RunBook to execute
-- Setup an Azure Automation account and create a RunBook to automate the resolution of performance issues
 
 ## Dependencies
 1. [Azure Account](https://azure.microsoft.com/en-us/free/)
@@ -28,37 +28,39 @@ With a combination of cloud technologies, such as Azure Kubernetes Service, VM S
    ```
    ssh -p [port] admin20210405@[public-ip]
    ```
-
-   scp -r ./azure-vote admin20210405@51.143.15.41:/home/admin20210405
 3. Use Azure Pipelines to deploy the application to the Azure VM Scale Set. Follow the step-by-step instructions [here](azure-pipelines-instructions.md).
 
 ## Application Insights & Log Analytics
 1. Create an Application Insights resource with the Log Analytics workspace
 2. Enable Application Insights monitoring for the VM Scale Set
-![](submission-screenshots/application-insights/vmss20210405_1.png)
-![](submission-screenshots/application-insights/vmss20210405_2.png)
+![](screenshots/application-insights/vmss20210405_1.png)
+![](screenshots/application-insights/vmss20210405_2.png)
 3. Add the instrumentation key of Application Insights to `main.py` 
 5. View custom event telemetry when 'Dogs' is clicked and when 'Cats' is clicked.
-![](submission-screenshots/application-insights/event.png)
+![](screenshots/application-insights/event.png)
 6. Create a query to view the event telemetry in Log Analytics.
-![](submission-screenshots/application-insights/trace_query_result.png)
+![](screenshots/application-insights/trace_query_result.png)
 7. Create a chart from query showing when 'Dogs' or 'Cats' is clicked.
-![](submission-screenshots/application-insights/trace_query_chart.png)
+![](screenshots/application-insights/trace_query_chart.png)
 
 ## Autoscaling
 1. For the VM Scale Set, create an autoscaling rule based on metrics.
-![](submission-screenshots/autoscaling-vmss/scaling_rule.png)
+![](screenshots/autoscaling-vmss/scaling_rule.png)
 2. Trigger the conditions for the rule, causing an autoscaling event.
-![](submission-screenshots/autoscaling-vmss/new_instance.png)
+![](screenshots/autoscaling-vmss/new_instance.png)
 3. When complete, enable manual scale.
+
+### Runbook
+1. Create an alert which uses a runbook to remedy a problem.
+![](screenshots/runbook/alert_config_4.png)
 
 ## Monitoring Containers
 1. Run `az login` to login, then run `./cluster.sh` to create an AKS cluster and deploy a container to it.
 2. Once that is completed, go to Insights for the cluster.
 3. Observe the state of the cluster. Note the number of nodes and number of containers.
-![](submission-screenshots/kubernetes-cluster/cluster_state.png)
+![](screenshots/kubernetes-cluster/cluster_state.png)
 4. Create an alert in Azure Monitor to trigger when the number of pods increases over a certain threshold.
-![](submission-screenshots/kubernetes-cluster/alert_rule.png)
+![](screenshots/kubernetes-cluster/alert_rule.png)
 5. Create an autoscaler by using the following Azure CLI command—`kubectl autoscale deployment azure-vote-front --cpu-percent=70 --min=1 --max=10`
 6. Cause load on the system. Run the following command:
    ```
@@ -71,11 +73,4 @@ With a combination of cloud technologies, such as Azure Kubernetes Service, VM S
    ```
 7. After approximately 10 minutes, stop the load.
 8. Observe the state of the cluster. Note the number of pods; it should have increased and should now be decreasing.
-![](submission-screenshots/kubernetes-cluster/cluter_state_after_scaling.png)
-
-### Runbook
-1. Create an Azure Automation Account
-2. Create an alert which uses a runbook to remedy a problem.
-![](submission-screenshots/runbook/alert_config_4.png)
-
-
+![](screenshots/kubernetes-cluster/cluter_state_after_scaling.png)
