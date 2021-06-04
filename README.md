@@ -1,7 +1,7 @@
 # Enhancing Applications
 
 ## Project Overview
-With a combination of cloud technologies, such as Azure Kubernetes Service, VM Scale Sets, Application Insights, Azure Log Analytics, and Azure Runbooks, I collected and displayed performance and health data about an application, and implemented automating remediation tasks. The project showcased my skills in diagnosing and rectifying application and infrastructure problems. Below are the project steps:
+With a combination of cloud technologies, such as Azure Kubernetes Service, VM Scale Sets, Application Insights, Azure Log Analytics, and Azure Runbooks, I collected and displayed performance and health data about an application, and implemented automated remediation tasks. The project showcased my skills in diagnosing and rectifying application and infrastructure problems. Below are the project steps:
 - Setup Application Insights monitoring on a VMSS and implement monitoring in an application to collect telemetry data
 - Setup an auto-scaling for a VMSS
 - Setup a VMSS alert and create a RunBook to automate the resolution of performance issues
